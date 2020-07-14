@@ -151,3 +151,47 @@ plt.axis("off")
 plt.show()
 ```
 ![d1e7bd13dc399891ef6e61745fef4ca2.png](en-resource://database/543:0)
+
+#### 6.matplotlib画图处理中文乱码
+
+```python
+plt.rcParams['font.sans-serif'] = ['SimHei']  # 中文字体设置-黑体
+plt.rcParams['axes.unicode_minus'] = False  # 解决保存图像是负号'-'显示为方块的问题
+sns.set(font='SimHei')  # 解决Seaborn中文显示问题并调整字体大小
+```
+
+#### 7.Pandas&Numpy设置显示全部信息
+
+```python
+#  显示500行500列，若要显示所有行和列，则为None
+pd.options.display.max_columns = 500
+pd.options.display.max_rows = 500
+# 显示所有行和列
+np.set_printoptions(threshold=np.inf)
+
+```
+#### 8. pandas读取大文件
+
+```python
+for i, df_chunk in enumerate(pd.read_csv(path, iterator=True, chunksize=chunksize)):
+    print(df_chunk)
+```
+
+#### 9. str转datatime
+
+```
+def tra_time(t):
+	'''
+	将str转datatime 
+    '''
+    if t[4:5] == '/':
+        return datetime.datetime.strptime(t,'%Y/%m/%d %H:%M:%S')
+    else:
+        return datetime.datetime.strptime(t,'%Y-%m-%d %H:%M:%S')
+
+def get_days(x):
+	'''
+	x: datetime.timedelta()类型
+	'''	
+    return (x.days+x.seconds/3600.)
+```
