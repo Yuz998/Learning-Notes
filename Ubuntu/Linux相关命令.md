@@ -82,7 +82,7 @@ unzip test.zip  #解压
 
 
 
-#### 9. 安装和卸载程序**
+#### 9. 安装和卸载程序
 
 ##### 9.1 安装程序
 
@@ -126,5 +126,22 @@ sudo rm –r ~/.name/     （name为删除的程序的目录）
 
 ```
 sudo rm -r /usr/share/applications/name.desktop  (name为快捷方式的名字)
+```
+
+
+
+#### 10.scp远程传输文件
+
+```
+# 把本地copy到远程服务器上
+scp 文件相对路径 远程主机用户名@主机ip:传输到远程主机的相对路径
+scp /data/test.py root@10.0.30.3:/data/user
+
+# 把远程服务器的文件copy到本地
+scp 远程主机用户名@主机ip:文件相对路径 传输到本地的相对路径
+scp root@10.0.30.3:/data/test.py /data/user
+
+## 如果需要传输整个文件夹，则在scp后面加 -r
+scp -r /data/test.py root@10.0.30.3:/data/user
 ```
 
