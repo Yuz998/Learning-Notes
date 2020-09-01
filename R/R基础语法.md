@@ -1,3 +1,11 @@
+# Anaconda配置R语言
+
+```
+conda install r
+```
+
+
+
 # 一、R语言的安装与运行（Vscode + R.exe）
 
 ## 1）R的安装
