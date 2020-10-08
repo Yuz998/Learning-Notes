@@ -3,6 +3,8 @@
 #### 1.将程序放在后台进行运行：
 ```
 nohup python test.py &
+
+nohup python -u text.py > log.txt 2>&1 &
 ```
 
 
