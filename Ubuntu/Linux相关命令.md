@@ -147,3 +147,69 @@ scp root@10.0.30.3:/data/test.py /data/user
 scp -r /data/test.py root@10.0.30.3:/data/user
 ```
 
+
+#### 11.开启root用户
+
+```
+sudo passwd root
+```
+
+#### 12.配置Zsh
+
+##### 1）安装Zsh
+
+~~~
+# 安装Zsh
+sudo apt-get install zsh
+
+# 将Zsh设置为默认Shell
+chsh -s /bin/zsh
+
+# 将bash设置为默认Shell
+chsh -s /bin/bash
+~~~
+
+##### 2）安装Oh My Zsh
+
+~~~
+# 安装 Oh My Zsh
+wget https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh -O - | sh
+# 以上命令可能不好使，可使用如下两条命令
+wget https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh
+bash ./install.sh
+~~~
+
+##### 3)安装zsh-syntax-highlighting
+
+```
+git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
+```
+
+##### 4)安装zsh-autosuggestions
+
+```
+git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+```
+
+##### 5)将anaconda环境加入zsh中
+
+```
+# 1)打开~/.bashrc
+
+__conda_setup="$('/data/anaconda3/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
+if [ $? -eq 0 ]; then
+        eval "$__conda_setup"
+else
+        if [ -f "/data/anaconda3/etc/profile.d/conda.sh" ]; then
+                . "/data/anaconda3/etc/profile.d/conda.sh"
+        else
+                export PATH="/data/anaconda3/bin:$PATH"
+        fi
+fi
+unset __conda_setup
+
+将上面conda的配置复制到~/.zshrc当中
+```
+
+
+
