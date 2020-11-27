@@ -97,3 +97,18 @@ alter table prima drop id;
 ```mysql
 mysqld --console
 ```
+
+10. 新版SQL授权用户，用Navicat远程服务器SQL 
+
+```
+## 1. 创建远程连接账户
+create user 'yuz'@'10.0.40.11' identified by '123456';
+
+## 2. 赋予权限
+grant all privileges on *.* to 'yuz'@'10.0.40.11';
+
+```
+
+![image-20201127204443571](C:\Users\yuz\AppData\Roaming\Typora\typora-user-images\image-20201127204443571.png)
+
+![image-20201127204650172](C:\Users\yuz\AppData\Roaming\Typora\typora-user-images\image-20201127204650172.png)
