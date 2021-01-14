@@ -112,3 +112,76 @@ grant all privileges on *.* to 'yuz'@'10.0.40.11';
 ![image-20201127204443571](C:\Users\yuz\AppData\Roaming\Typora\typora-user-images\image-20201127204443571.png)
 
 ![image-20201127204650172](C:\Users\yuz\AppData\Roaming\Typora\typora-user-images\image-20201127204650172.png)
+
+##### 11. LEAD()函数和LAG()函数
+
+**1) LEAD()**
+
+`LEAD()`是一个Window函数，它提供对当前行之后的指定物理偏移量的行的访问。
+
+例如，通过使用`LEAD()`函数，可以从当前行访问下一行的数据或下一行之后的行
+
+```
+LEAD(return_value ,offset [,default]) 
+OVER (
+    [PARTITION BY partition_expression, ... ]
+    ORDER BY sort_expression [ASC | DESC], ...
+)
+```
+
+`return_value` - 基于指定偏移量的后续行的返回值。返回值必须求值为单个值，不能是另一个Window函数。
+
+`offset`是从当前行转发的行数，用于访问数据。`offset`可以是表达式，子查询或列，其值为正整数。如果未明确指定，则`offset`的默认值为`1`。
+
+如果`offset`超出分区范围，则该函数返回`default`。 如果未指定，则默认为`NULL`。
+
+`PARTITION BY`子句将结果集的行分配到应用了`LEAD()`函数的分区。
+
+如果未指定`PARTITION BY`子句，则该函数将整个结果集视为单个分区。
+
+`ORDER BY`子句指定应用`LEAD()`函数的每个分区中行的逻辑顺序。
+
+```sql
+select month, brand_name, net_sales,
+LEAD(net_sales, 1) OVER(
+PARTITION BY brand_name
+ORDER BY month
+) nex_months_sales
+FROM
+sales where year=2018;
+```
+
+**2)  LAG()函数**
+
+`LAG()`是一个Window函数，它提供对当前行之前的指定物理偏移量的行的访问。
+
+换句话说，通过使用`LAG()`函数，可以从当前行访问上一行的数据或上一行之前的行。
+
+```sql
+LAG(return_value ,offset [,default]) 
+OVER (
+    [PARTITION BY partition_expression, ... ]
+    ORDER BY sort_expression [ASC | DESC], ...
+)
+```
+
+`return_value` - 基于指定偏移量的前一行的返回值。 返回值必须求值为单个值，不能是另一个Window函数。
+
+`offset` - 从当前行返回的行数，用于访问数据。 `offset`可以是计算结果为正整数的表达式，[子查询](http://www.yiibai.com/sqlserver/sql-server-subquery.html)或列。如果未明确指定`offset`，则它的默认值为`1`。
+
+`default` - 是当`offset`超出分区范围时要返回的值。如果未指定，则默认为`NULL`。
+
+`PARTITION BY`子句将结果集的行分配到应用`LAG()`函数的分区。如果省略`PARTITION BY`子句，该函数会将整个结果集视为单个分区。
+
+`ORDER BY`子句指定应用`LAG()`函数的每个分区中行的逻辑顺序。
+
+```sql
+select month, brand_name, net_sales,
+LAG(net_sales, 1) OVER(
+PARTITION BY brand_name
+ORDER BY month
+) nex_months_sales
+FROM
+sales where year=2018;
+```
+
