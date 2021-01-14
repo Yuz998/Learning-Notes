@@ -97,7 +97,7 @@ OUT:
        [1.3       , 4.6       , 2.3       , 1.9       ]])
 ```
 
-###### 3) 迭代插补IterativeImputer
+###### 3) 插补KNNImputer
 
 `sklearn.impute.KNNImputer`(***, *missing_values=nan*, *n_neighbors=5*, *weights='uniform'*, *metric='nan_euclidean'*, *copy=True*, *add_indicator=False*)
 
